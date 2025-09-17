@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Email Signature</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #dbdbd2;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signature-wrapper {
+            position: relative;
+            background-color: #141313;
+            max-width: 500px;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            border-right: 8px solid rgb(233, 10, 10);
+            border-bottom-right-radius: 50px;
+            border-top-left-radius: 20px;
+        }
+
+        /* Background panel (left colored / patterned) */
+        .signature-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 140px;
+            border-radius: 19px 5px 100px 0 ;
+            border: 2px solid rgb(245, 238, 238);
+            /* portion of the card */
+            height: 99%;
+            /* Example with gradient */
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            /* Or use an image => background: url('pattern-or-image.jpg') center/cover no-repeat; */
+            /* adjust transparency if needed with rgba or a semi-transparent overlay */
+        }
+
+        .signature-photo {
+            flex-shrink: 0;
+            margin-left: 20px;
+            /* move it inside the colored panel */
+            z-index: 1;
+            /* bring above the panel */
+        }
+
+        .signature-photo img {
+            border-radius: 50%;
+            width: 100px;
+            height: 120px;
+            object-fit:fill;
+            border: 3px solid #db1111ef;
+            /* white border so it stands out on colored background */
+        }
+
+      
+
+        .signature-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 24px 16px 20px;
+            /* give left padding to push text away from photo & panel */
+            z-index: 1;
+            border-top: 8px solid red;
+            border-top-left-radius: 60px;
+            background-color: #f5e9e7;
+            
+        }
+
+        .name {
+            font-size: 20px;
+            font-family:serif;
+            font-weight:bold;
+            color: #f03709;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 14px;
+            color: #0a39d3;
+            margin-bottom: 12px;
+            font-weight:600;
+        }
+
+        .divider {
+            width: 150px;
+            height: 2px;
+            background-color: #f0190a;
+            margin: 12px 0;
+        }
+
+        .contact-line {
+            font-size: 14px;
+
+            color: #0a0a0a;
+            margin: 4px 0;
+        }
+
+        .contact-line a {
+            color: #005f73;
+            text-decoration: none;
+
+        }
+
+        .social-icons {
+            margin-top: 16px;
+        }
+
+        .social-icons a {
+            margin-right: 12px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            filter: grayscale(0.5);
+            transition: filter 0.2s ease;
+        }
+
+        .social-icons img:hover {
+            filter: grayscale(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signature-wrapper">
+        <!-- Left: Image -->
+        <div class="signature-photo">
+            <img src="data:image/jpeg;base64,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"
+                alt="Your Photo">
+        </div>
+
+        <!-- Right: Info -->
+        <div class="signature-info">
+            <div class="name">Mudassar Shabir</div>
+            <div class="title">Software Engineer</div>
+
+            <div class="divider"></div>
+
+            <div class="contact-line">
+                📧 <a href="mailto:john.doe@example.com">mudassarshabir70@gmail.com</a>
+            </div>
+            <div class="contact-line">
+                📞 <a href="tel:+1234567890">0302-7011428</a>
+            </div>
+            <div class="contact-line">
+                🌐 <a href="https://mudassar-shabir.github.io/portfolio/" target="_blank">mywebsite.com</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/24/174/174857.png" alt="LinkedIn" />
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter" />
+                </a>
+                <a href="#" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/24/733/733553.png" alt="GitHub" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
